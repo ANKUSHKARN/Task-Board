@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Board
 
-## Getting Started
+Live Demo: https://task-board-beta-six.vercel.app/
 
-First, run the development server:
+A simple Task Board application built using Next.js. Users can securely sign up, log in, create personal tasks, and update task status.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Tech Stack Used
+
+### Frontend
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+
+### Backend
+- Next.js Route Handlers
+- JWT Authentication
+- bcryptjs (Password Hashing)
+
+### Database
+- PostgreSQL (NeonDB)
+
+### ORM
+- Prisma ORM
+
+### Deployment
+- Vercel
+
+---
+
+## Short Explanation of Authentication Flow
+
+The application uses **JWT-based authentication** with **HttpOnly cookies** for secure session management.
+
+### Signup Flow
+1. User enters name, email, and password.
+2. Password is hashed using bcryptjs before storing.
+3. User data is saved in PostgreSQL database.
+
+### Login Flow
+1. User enters email and password.
+2. Credentials are verified.
+3. If valid, a JWT token is generated.
+4. Token is stored in an HttpOnly cookie.
+
+### Protected Access
+Only authenticated users with a valid token cookie can:
+
+- Create tasks
+- View their own tasks
+- Update task status
+- Access dashboard
+
+### Logout Flow
+- Token cookie is cleared.
+- User session ends.
+
+---
+
+## Database Schema Explanation
+
+The project contains two main models:
+
+### User Model
+
+| Field      | Type     | Description |
+|-----------|----------|-------------|
+| id        | String   | Primary Key |
+| name      | String   | User Name |
+| email     | String   | Unique Email |
+| password  | String   | Hashed Password |
+| createdAt | DateTime | Created Timestamp |
+
+### Task Model
+
+| Field      | Type     | Description |
+|-----------|----------|-------------|
+| id        | String   | Primary Key |
+| title     | String   | Task Title |
+| status    | Enum     | TODO / IN_PROGRESS / DONE |
+| createdAt | DateTime | Created Timestamp |
+| userId    | String   | Foreign Key |
+
+### Relationship Diagram
+
+```text
+User (1) ---------> (Many) Task
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Steps to Run Locally
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Clone the Repository
+```
+git clone
+cd task-board
+npm install
+```
+# Setup .env
 
-## Learn More
+```
+DATABASE_URL="NeonDB_connection_url"
+JWT_SECRET="secret_key"
+```
 
-To learn more about Next.js, take a look at the following resources:
+# Setup Prisma
+```
+npx prisma generate
+npx prisma db push
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Run the app
+```
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+# Demo Credentials
+ Email : ankush@test.com
+ Password: 123456
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ ---
