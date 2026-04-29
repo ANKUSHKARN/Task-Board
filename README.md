@@ -92,34 +92,39 @@ User (1) ---------> (Many) Task
 
 ## Steps to Run Locally
 
-# Clone the Repository
+### Clone the Repository
 ```
 git clone
 cd task-board
 npm install
 ```
-# Setup .env
+### Setup .env
 
 ```
 DATABASE_URL="NeonDB_connection_url"
 JWT_SECRET="secret_key"
 ```
 
-# Setup Prisma
+### Setup Prisma
 ```
 npx prisma generate
 npx prisma db push
 ```
 
-# Run the app
+### Run the app
 ```
 npm run dev
 ```
 
 ---
 
-# Demo Credentials
- Email : ankush@test.com
- Password: 123456
-
+## Demo Credentials
+ Email
+ ```
+ankush@test.com
+```
+Password
+```
+123456
+```
  ---
